@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розклад занять</title>
+    <style>
+        :root {
+            --background-color: #121212;
+            --text-color: #E0E0E0;
+            --secondary-text-color: #A0A0A0;
+            --card-background: #1E1E1E;
+            --accent-color: #BB86FC;
+            --border-color: #2C2C2C;
+            --hover-color: #333333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .week-selector {
+            margin-top: 10px;
+        }
+
+        .week-selector button {
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
+            color: var(--secondary-text-color);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 14px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+
+        .week-selector button.active,
+        .week-selector button:hover {
+            background-color: var(--hover-color);
+            color: var(--text-color);
+        }
+
+        .day-navigation {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .day-navigation button {
+            background: none;
+            border: none;
+            color: var(--secondary-text-color);
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .day-navigation button.active,
+        .day-navigation button:hover {
+            background-color: var(--hover-color);
+            color: var(--text-color);
+        }
+
+        .schedule-day {
+            display: none;
+        }
+
+        .schedule-day.active {
+            display: block;
+        }
+
+        .schedule-item {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .schedule-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .time {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .subject {
+            font-size: 1.1em;
+            margin: 0;
+        }
+
+        .details {
+            margin-top: 10px;
+            color: var(--secondary-text-color);
+            line-height: 1.6;
+        }
+
+        .details a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .details a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Стилі для відображення парних/непарних тижнів */
+        body:not(.is-odd-week) .schedule-item[data-week="odd"],
+        body:not(.is-even-week) .schedule-item[data-week="even"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Розклад занять</h1>
+            <div class="header-content">
+                <p id="week-status">Тиждень: </p>
+                <div class="week-selector">
+                    <button onclick="setWeekDisplay('odd')">Непарний</button>
+                    <button onclick="setWeekDisplay('even')">Парний</button>
+                </div>
+            </div>
+        </header>
+
+        <nav class="day-navigation">
+            <button onclick="showDay('monday')">Понеділок</button>
+            <button onclick="showDay('tuesday')">Вівторок</button>
+            <button onclick="showDay('wednesday')">Середа</button>
+            <button onclick="showDay('thursday')">Четвер</button>
+            <button onclick="showDay('friday')">П'ятниця</button>
+        </nav>
+
+        <main>
+            <section id="monday" class="schedule-day">
+                <h2>Понеділок</h2>
+                <div class="schedule-item" data-week="odd">
+                    <div class="time">8:00 – 9:35</div>
+                    <p class="subject">Менеджмент (Лекції)</p>
+                    <div class="details">
+                        <p>Викладач: Володимир Юрійович Філіппов</p>
+                        <p>Примітка: непарний тиждень</p>
+                        <a href="https://meet.google.com/jqi-ogzm-cjs?authuser=0&hs=179" target="_blank">Google Meet</a>
+                    </div>
+                </div>
+                <div class="schedule-item" data-week="even">
+                    <div class="time">8:00 – 9:35</div>
+                    <p class="subject">Менеджмент (Практичні заняття)</p>
+                    <div class="details">
+                        <p>Викладач: Янгулов Елвін Павлович</p>
+                        <p>Примітка: парний тиждень</p>
+                        <a href="https://meet.google.com/jqi-ogzm-cjs?authuser=0&hs=179" target="_blank">Google Meet</a>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time">9:50 – 11:25</div>
+                    <p class="subject">Технології створення ПП</p>
+                    <div class="details">
+                        <p>Викладач: д. Блажко О.А.</p>
+                        <p>ID: 876 4775 3497 | Пароль: 306089</p>
+                        <a href="https://us02web.zoom.us/j/87647753497?pwd=eTJzOGo5bGZnNC9NMGRBVFNKRVlQUT09" target="_blank">Zoom</a>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time">11:40 – 13:15</div>
+                    <p class="subject">Комп’ютерні мережі</p>
+                    <div class="details">
+                        <p>Викладач: д. Вороненко М.О.</p>
+                        <p>ID: 329 879 7262 | Код: 9uUveM</p>
+                        <a href="https://us04web.zoom.us/j/3298797262?pwd=eTQzYWtsRWRyNEtPS3BxUzhwTzcwdz09" target="_blank">Zoom</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tuesday" class="schedule-day">
+                <h2>Вівторок</h2>
+                <div class="schedule-item">
+                    <div class="time">9:50 – 11:25</div>
+                    <p class="subject">Комп’ютерні мережі (лаб.)</p>
+                    <div class="details">
+                        <p>Викладачі: д. Вороненко М.О., ас. Засідько А.Я.</p>
+                        <a href="https://us04web.zoom.us/j/3298797262?pwd=eTQzYWtsRWRyNEtPS3BxUzhwTzcwdz09" target="_blank">Zoom</a>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time">11:40 – 13:15</div>
+                    <p class="subject">Інтелектуальний аналіз даних</p>
+                    <div class="details">
+                        <p>Викладач: пр. Антощук С.Г.</p>
+                        <a href="https://teams.microsoft.com/l/team/19%3A-GXIuYeXJbt1OXIKv60vV-O1DG1hADlPJoOx9JQKwT41%40thread.tacv2/conversations?groupId=c5b9beb3-3310-4092-a57d-ef7440d200a2&tenantId=bd2fa240-71fc-45bd-abce-f1bc80beeb0a" target="_blank">Teams</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="wednesday" class="schedule-day">
+                <h2>Середа</h2>
+                <div class="schedule-item">
+                    <div class="time">8:00 – 9:35</div>
+                    <p class="subject">Інтелектуальний аналіз даних (лаб.)</p>
+                    <div class="details">
+                        <p>Викладачі: ас. Кошутіна Д.В., пр. Щербакова Г.Ю.</p>
+                        <a href="https://teams.microsoft.com/l/team/19%3A-GXIuYeXJbt1OXIKv60vV-O1DG1hADlPJoOx9JQKwT41%40thread.tacv2/conversations?groupId=c5b9beb3-3310-4092-a57d-ef7440d200a2&tenantId=bd2fa240-71fc-45bd-abce-f1bc80beeb0a" target="_blank">Teams</a>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time">9:50 – 11:25</div>
+                    <p class="subject">Обчислювальні методи</p>
+                    <div class="details">
+                        <p>Викладач: л. Шпиньковський О.А.</p>
+                        <a href="https://teams.microsoft.com/l/meetup-join/19%3ayp3vNP3BqAVPkuW2Y8YqKOKXF0QQlydP0_Y1XiVUDqY1%40thread.tacv2/1724955558997?context=%7b%22Tid%22%3a%22bd2fa240-71fc-45bd-abce-f1bc80beeb0a%22%2c%22Oid%22%3a%226e50c4db-d1c1-4aee-989d-96271729c62c%22%7d" target="_blank">Teams</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="thursday" class="schedule-day">
+                <h2>Четвер</h2>
+                <div class="schedule-item">
+                    <div class="time">9:50 – 11:25</div>
+                    <p class="subject">Забезпечення якості та тестування ПП</p>
+                    <div class="details">
+                        <p>Викладач: ст.в. Баськов І.В.</p>
+                        <a href="https://us04web.zoom.us/j/2872972964?pwd=NVBhNmVVN2lNQlpqWmxHNWhOeXBFUT09" target="_blank">Zoom</a>
+                    </div>
+                </div>
+                <div class="schedule-item" data-week="odd">
+                    <div class="time">11:40 – 13:15</div>
+                    <p class="subject">Забезпечення якості (лаб.)</p>
+                    <div class="details">
+                        <p>Викладачі: д. Бабич М.І., ст.в. Баськов І.В.</p>
+                        <p>Примітка: непарний тиждень</p>
+                        <a href="https://us04web.zoom.us/j/2872972964?pwd=NVBhNmVVN2lNQlpqWmxHNWhOeXBFUT09" target="_blank">Zoom</a>
+                    </div>
+                </div>
+                <div class="schedule-item" data-week="odd">
+                    <div class="time">13:30 – 15:05</div>
+                    <p class="subject">Обчислювальні методи (лаб.)</p>
+                    <div class="details">
+                        <p>Викладачі: д. Шпиньковський О.А., д. Дрозд Ю.В.</p>
+                        <p>Примітка: непарний тиждень</p>
+                        <a href="https://teams.microsoft.com/l/meetup-join/19%3ayp3vNP3BqAVPkuW2Y8YqKOKXF0QQlydP0_Y1XiVUDqY1%40thread.tacv2/1724955558997?context=%7b%22Tid%22%3a%22bd2fa240-71fc-45bd-abce-f1bc80beeb0a%22%2c%22Oid%22%3a%226e50c4db-d1c1-4aee-989d-96271729c62c%22%7d" target="_blank">Teams</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="friday" class="schedule-day">
+                <h2>П’ятниця</h2>
+                <div class="schedule-item" data-week="even">
+                    <div class="time">9:35 – 11:25</div>
+                    <p class="subject">ВЕБ-технології та ВЕБ-дизайн (лаб.)</p>
+                    <div class="details">
+                        <p>Викладачі: д. Червоненко П.П., ст.в. Бабійчук О.Б.</p>
+                        <p>Примітка: парний тиждень</p>
+                        <a href="https://meet.google.com/rqx-ers-vqr" target="_blank">Google Meet</a>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time">9:50 – 11:25</div>
+                    <p class="subject">ВЕБ-технології та ВЕБ-дизайн</p>
+                    <div class="details">
+                        <p>Викладач: д. Червоненко П.П.</p>
+                        <a href="https://meet.google.com/rqx-ers-vqr" target="_blank">Google Meet</a>
+                    </div>
+                </div>
+                <div class="schedule-item" data-week="even">
+                    <div class="time">11:40 – 13:15</div>
+                    <p class="subject">Технології створення ПП (лаб.)</p>
+                    <div class="details">
+                        <p>Викладачі: д. Блажко О.А., д. Дрозд М.О.</p>
+                        <p>Примітка: парний тиждень</p>
+                        <a href="https://us02web.zoom.us/j/87647753497?pwd=eTJzOGo5bGZnNC9NMGRBVFNKRVlQUT09" target="_blank">Zoom</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function showDay(dayId) {
+            document.querySelectorAll('.schedule-day').forEach(day => {
+                day.classList.remove('active');
+            });
+            document.querySelectorAll('.day-navigation button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            const selectedDay = document.getElementById(dayId);
+            if (selectedDay) {
+                selectedDay.classList.add('active');
+            }
+
+            const activeButton = document.querySelector(`.day-navigation button[onclick="showDay('${dayId}')"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+        }
+
+        function setWeekDisplay(type) {
+            const body = document.body;
+            const weekStatus = document.getElementById('week-status');
+            
+            body.classList.remove('is-odd-week', 'is-even-week');
+            
+            if (type === 'odd') {
+                body.classList.add('is-odd-week');
+                weekStatus.textContent = 'Тиждень: непарний';
+            } else if (type === 'even') {
+                body.classList.add('is-even-week');
+                weekStatus.textContent = 'Тиждень: парний';
+            }
+        }
+
+        const getWeekStatus = () => {
+            const startDate = new Date('2025-09-01T00:00:00'); 
+            const now = new Date();
+            
+            const getMonday = (d) => {
+                d = new Date(d);
+                const day = d.getDay();
+                const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+                return new Date(d.setDate(diff));
+            };
+            
+            const startMonday = getMonday(startDate);
+            const nowMonday = getMonday(now);
+            const oneWeek = 1000 * 60 * 60 * 24 * 7;
+            const weekDiff = Math.floor((nowMonday - startMonday) / oneWeek);
+            
+            const weekNumber = weekDiff + 1;
+            const isEven = weekNumber % 2 === 0;
+            
+            return { isEven, weekNumber };
+        };
+
+        const { isEven } = getWeekStatus();
+        setWeekDisplay(isEven ? 'even' : 'odd');
+        
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const todayIndex = new Date().getDay();
+        const todayId = days[todayIndex].toLowerCase();
+        
+        const initialDay = (todayIndex === 0 || todayIndex === 6) ? 'monday' : todayId;
+        showDay(initialDay);
+    </script>
+</body>
+</html>
