@@ -150,6 +150,33 @@
         body:not(.is-even-week) .schedule-item[data-week="even"] {
             display: none;
         }
+
+        /* Адаптивний дизайн для малих екранів */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .day-navigation {
+                flex-direction: column;
+                padding: 5px;
+            }
+
+            .day-navigation button {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .week-selector {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .week-selector button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
     </style>
 </head>
 <body>
