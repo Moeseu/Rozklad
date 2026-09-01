@@ -47,8 +47,14 @@
             align-items: center;
         }
 
+        #week-status {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: var(--text-color);
+        }
+
         .week-selector {
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .week-selector button {
@@ -224,7 +230,6 @@
                         <a href="https://us02web.zoom.us/j/5907519061?pwd=VlNCbzR4NlVTRFU5WXQyVms3QmptUT09" target="_blank">Zoom</a>
                     </div>
                 </div>
-                <!-- Парний тиждень -->
                 <div class="schedule-item" data-week="even">
                     <div class="time">11:40 – 13:15</div>
                     <p class="subject">Цифрова обробка (Лаб.)</p>
@@ -255,7 +260,6 @@
                         <a href="https://us02web.zoom.us/j/89985292423?pwd=487r8PYkznBvNyaQIJCwOTsVNRpnFE.1" target="_blank">Zoom</a>
                     </div>
                 </div>
-                <!-- Парний тиждень -->
                 <div class="schedule-item" data-week="even">
                     <div class="time">11:40 – 13:15</div>
                     <p class="subject">Мікросервісна архітектура (Лаб.)</p>
@@ -323,27 +327,6 @@
             if (activeButton) activeButton.classList.add('active');
         }
 
-        function setWeekDisplay(type) {
-            const body = document.body;
-            const weekStatus = document.getElementById('week-status');
-            const btnOdd = document.getElementById('btn-odd');
-            const btnEven = document.getElementById('btn-even');
-            
-            body.classList.remove('is-odd-week', 'is-even-week');
-            btnOdd.classList.remove('active');
-            btnEven.classList.remove('active');
-            
-            if (type === 'odd') {
-                body.classList.add('is-odd-week');
-                weekStatus.textContent = 'Тиждень: непарний';
-                btnOdd.classList.add('active');
-            } else if (type === 'even') {
-                body.classList.add('is-even-week');
-                weekStatus.textContent = 'Тиждень: парний';
-                btnEven.classList.add('active');
-            }
-        }
-
         const getWeekStatus = () => {
             const startDate = new Date('2025-09-01T00:00:00'); 
             const now = new Date();
@@ -356,12 +339,38 @@
             const startMonday = getMonday(startDate);
             const nowMonday = getMonday(now);
             const weekDiff = Math.floor((nowMonday - startMonday) / (1000 * 60 * 60 * 24 * 7));
-            const weekNumber = weekDiff + 1;
-            return { isEven: weekNumber % 2 === 0 };
+            const weekNumber = Math.max(1, weekDiff + 1);
+            return { 
+                weekNumber: weekNumber,
+                isEven: weekNumber % 2 === 0 
+            };
         };
 
-        const { isEven } = getWeekStatus();
-        setWeekDisplay(isEven ? 'even' : 'odd');
+        const currentWeekInfo = getWeekStatus();
+
+        function setWeekDisplay(type) {
+            const body = document.body;
+            const weekStatus = document.getElementById('week-status');
+            const btnOdd = document.getElementById('btn-odd');
+            const btnEven = document.getElementById('btn-even');
+            
+            body.classList.remove('is-odd-week', 'is-even-week');
+            btnOdd.classList.remove('active');
+            btnEven.classList.remove('active');
+            
+            const weekTypeLabel = type === 'odd' ? 'непарний' : 'парний';
+            weekStatus.textContent = `Тиждень: ${weekTypeLabel} (${currentWeekInfo.weekNumber}-й тиждень)`;
+
+            if (type === 'odd') {
+                body.classList.add('is-odd-week');
+                btnOdd.classList.add('active');
+            } else if (type === 'even') {
+                body.classList.add('is-even-week');
+                btnEven.classList.add('active');
+            }
+        }
+
+        setWeekDisplay(currentWeekInfo.isEven ? 'even' : 'odd');
 
         const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         const todayIndex = new Date().getDay();
