@@ -1,100 +1,237 @@
-<table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
-    <caption>Розклад занять групи АІ-233</caption>
-    <thead>
-        <tr>
-            <th>День</th>
-            <th>Час</th>
-            <th>Тип та Дисципліна</th>
-            <th>Викладач</th>
-            <th>Посилання (Zoom)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Понеділок -->
-        <tr>
-            <td rowspan="2"><b>Понеділок</b></td>
-            <td>9:50 - 11:25</td>
-            <td>Лекція: Технології захисту інформації</td>
-            <td>доц. Болтьонков В. О.</td>
-            <td><a href="https://us02web.zoom.us/j/5907519061?pwd=VlNCbzR4NlVTRFU5WXQyVms3QmptUT09" target="_blank">Приєднатися</a><br><small>ID: 590 751 9061 | Код: ajj61A</small></td>
-        </tr>
-        <tr>
-            <td>11:40 - 13:15</td>
-            <td>Лекція: Проєктування ІС</td>
-            <td>д. Галчонков О.М.</td>
-            <td><a href="https://us02web.zoom.us/j/87331896215?pwd=EAeyVKFgGTWIOip3QsbHyWQMNRjHMQ.1" target="_blank">Приєднатися</a><br><small>ID: 873 3189 6215 | Код: 976286</small></td>
-        </tr>
-        
-        <!-- Вівторок -->
-        <tr>
-            <td rowspan="3"><b>Вівторок</b></td>
-            <td>8:00 - 9:35</td>
-            <td>Лаб: Проєктування ІС</td>
-            <td>д. Галчонков О.М., ств. Баськов І. В.</td>
-            <td><a href="https://us04web.zoom.us/j/2872972964?pwd=NVBhNmVVN2lNQlpqWmxHNWhOeXBFUT09" target="_blank">Приєднатися</a></td>
-        </tr>
-        <tr>
-            <td>9:50 - 11:25</td>
-            <td>Лекція: Системний аналіз і теорія прийняття рішень</td>
-            <td>д. Болтьонков В.О.</td>
-            <td><a href="https://us02web.zoom.us/j/5907519061?pwd=VlNCbzR4NlVTRFU5WXQyVms3QmptUT09" target="_blank">Приєднатися</a><br><small>ID: 590 751 9061 | Код: ajj61A</small></td>
-        </tr>
-        <tr>
-            <td>11:40 - 13:15</td>
-            <td>Лаб: Цифрова обробка <i>(Парні тижні)</i></td>
-            <td>д. Ніколенко А.О., д. Бабілунга О.Ю.</td>
-            <td><a href="https://us02web.zoom.us/j/75815387400?pwd=NmlqdGZmbW5yK1BuQmFiZXB1S2lKQT09" target="_blank">Приєднатися</a></td>
-        </tr>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розклад занять групи АІ-233</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .schedule-container {
+            width: 100%;
+            max-width: 1100px;
+            overflow-x: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            text-align: left;
+            min-width: 700px;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #34495e;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.05em;
+        }
+        tr:nth-of-type(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        td[rowspan] {
+            font-weight: bold;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            text-align: center;
+            vertical-align: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        a.zoom-link {
+            display: inline-block;
+            margin-bottom: 5px;
+            padding: 6px 12px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+        }
+        a.zoom-link:hover {
+            background-color: #2980b9;
+        }
+        .details {
+            display: block;
+            color: #7f8c8d;
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+        .week-type {
+            font-size: 0.85em;
+            color: #e74c3c;
+            font-weight: bold;
+            display: block;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
 
-        <!-- Середа -->
-        <tr>
-            <td rowspan="3"><b>Середа</b></td>
-            <td>8:00 - 9:35</td>
-            <td>Лаб: Технології захисту інформації</td>
-            <td>д. Болтьонков В.О., ас. Соловйова Д. В.</td>
-            <td><a href="https://us05web.zoom.us/j/82695530337?pwd=1thcIMYSpSgNWl3s1nTHzpftev2q6J.1" target="_blank">Приєднатися</a><br><small>ID: 826 9553 0337 | Код: 970fiu</small></td>
-        </tr>
-        <tr>
-            <td>9:50 - 11:25</td>
-            <td>Лекція: Мікросервісна архітектура</td>
-            <td>д. Галчонков О. М.</td>
-            <td><a href="https://us02web.zoom.us/j/89985292423?pwd=487r8PYkznBvNyaQIJCwOTsVNRpnFE.1" target="_blank">Приєднатися</a></td>
-        </tr>
-        <tr>
-            <td>11:40 - 13:15</td>
-            <td>Лаб: Мікросервісна архітектура <i>(Парні тижні)</i></td>
-            <td>д. Галчонков О. М., ств. Баськов І. В.</td>
-            <td><a href="https://us04web.zoom.us/j/2872972964?pwd=NVBhNmVVN2lNQlpqWmxHNWhOeXBFUT09" target="_blank">Приєднатися</a></td>
-        </tr>
+    <div class="schedule-container">
+        <h1>Розклад занять групи АІ-233</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>День</th>
+                    <th>Час</th>
+                    <th>Тип та Дисципліна</th>
+                    <th>Викладач</th>
+                    <th>Посилання (Zoom)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Понеділок -->
+                <tr>
+                    <td rowspan="2">Понеділок</td>
+                    <td>9:50 - 11:25</td>
+                    <td>Лекція: Технології захисту інформації</td>
+                    <td>доц. Болтьонков В. О.</td>
+                    <td>
+                        <a href="https://us02web.zoom.us/j/5907519061?pwd=VlNCbzR4NlVTRFU5WXQyVms3QmptUT09" class="zoom-link" target="_blank">Приєднатися</a>
+                        <span class="details">ID: 590 751 9061<br>Код: ajj61A</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:40 - 13:15</td>
+                    <td>Лекція: Проєктування ІС</td>
+                    <td>д. Галчонков О.М.</td>
+                    <td>
+                        <a href="https://us02web.zoom.us/j/87331896215?pwd=EAeyVKFgGTWIOip3QsbHyWQMNRjHMQ.1" class="zoom-link" target="_blank">Приєднатися</a>
+                        <span class="details">ID: 873 3189 6215<br>Код: 976286</span>
+                    </td>
+                </tr>
+                
+                <!-- Вівторок -->
+                <tr>
+                    <td rowspan="3">Вівторок</td>
+                    <td>8:00 - 9:35</td>
+                    <td>Лаб: Проєктування ІС</td>
+                    <td>д. Галчонков О.М., ств. Баськов І. В.</td>
+                    <td>
+                        <a href="https://us04web.zoom.us/j/2872972964?pwd=NVBhNmVVN2lNQlpqWmxHNWhOeXBFUT09" class="zoom-link" target="_blank">Приєднатися</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>9:50 - 11:25</td>
+                    <td>Лекція: Системний аналіз і теорія прийняття рішень</td>
+                    <td>д. Болтьонков В.О.</td>
+                    <td>
+                        <a href="https://us02web.zoom.us/j/5907519061?pwd=VlNCbzR4NlVTRFU5WXQyVms3QmptUT09" class="zoom-link" target="_blank">Приєднатися</a>
+                        <span class="details">ID: 590 751 9061<br>Код: ajj61A</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:40 - 13:15</td>
+                    <td>
+                        Лаб: Цифрова обробка
+                        <span class="week-type">(Парні тижні)</span>
+                    </td>
+                    <td>д. Ніколенко А.О., д. Бабілунга О.Ю.</td>
+                    <td>
+                        <a href="https://us02web.zoom.us/j/75815387400?pwd=NmlqdGZmbW5yK1BuQmFiZXB1S2lKQT09" class="zoom-link" target="_blank">Приєднатися</a>
+                    </td>
+                </tr>
 
-        <!-- Четвер -->
-        <tr>
-            <td rowspan="2"><b>Четвер</b></td>
-            <td>9:50 - 11:25</td>
-            <td>Лекція: Методи та системи ШІ</td>
-            <td>пр. Арсірій О.О.</td>
-            <td><a href="https://us02web.zoom.us/j/88573994331?pwd=S242c0FXVjRCYzRzS3FvU3dZbENtZz09" target="_blank">Приєднатися</a><br><small>ID: 885 7399 4331 | Код: 779285</small></td>
-        </tr>
-        <tr>
-            <td>11:40 - 13:15</td>
-            <td>Лаб: Методи та системи ШІ</td>
-            <td>д. Смик С.Ю., д. Ніколенко А.О.</td>
-            <td><a href="https://us02web.zoom.us/j/75815387400?pwd=NmlqdGZmbW5yK1BuQmFiZXB1S2lKQT09" target="_blank">Приєднатися</a></td>
-        </tr>
+                <!-- Середа -->
+                <tr>
+                    <td rowspan="3">Середа</td>
+                    <td>8:00 - 9:35</td>
+                    <td>Лаб: Технології захисту інформації</td>
+                    <td>д. Болтьонков В.О., ас. Соловйова Д. В.</td>
+                    <td>
+                        <a href="https://us05web.zoom.us/j/82695530337?pwd=1thcIMYSpSgNWl3s1nTHzpftev2q6J.1" class="zoom-link" target="_blank">Приєднатися</a>
+                        <span class="details">ID: 826 9553 0337<br>Код: 970fiu</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>9:50 - 11:25</td>
+                    <td>Лекція: Мікросервісна архітектура</td>
+                    <td>д. Галчонков О. М.</td>
+                    <td>
+                        <a href="https://us02web.zoom.us/j/89985292423?pwd=487r8PYkznBvNyaQIJCwOTsVNRpnFE.1" class="zoom-link" target="_blank">Приєднатися</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:40 - 13:15</td>
+                    <td>
+                        Лаб: Мікросервісна архітектура
+                        <span class="week-type">(Парні тижні)</span>
+                    </td>
+                    <td>д. Галчонков О. М., ств. Баськов І. В.</td>
+                    <td>
+                        <a href="https://us04web.zoom.us/j/2872972964?pwd=NVBhNmVVN2lNQlpqWmxHNWhOeXBFUT09" class="zoom-link" target="_blank">Приєднатися</a>
+                    </td>
+                </tr>
 
-        <!-- П'ятниця -->
-        <tr>
-            <td rowspan="2"><b>П'ятниця</b></td>
-            <td>9:50 - 11:25</td>
-            <td>Лекція: Цифрова обробка звуку та зображень</td>
-            <td>д. Бабілунга О.Ю.</td>
-            <td><a href="https://us02web.zoom.us/j/87266012465?pwd=VmtrTC9kUFZTRXVhZXF1NEtod3h2dz09" target="_blank">Приєднатися</a><br><small>ID: 872 6601 2465 | Код: 605676</small></td>
-        </tr>
-        <tr>
-            <td>11:40 - 13:15</td>
-            <td>Лаб: Системний аналіз</td>
-            <td>ств. Гнатенко В.Ю., д. Куваєва В.І.</td>
-            <td><a href="https://us04web.zoom.us/j/2872972964?pwd=NVBhNmVVN2lNQlpqWmxHNWhOeXBFUT09" target="_blank">Приєднатися</a><br><small>ID: 420 970 6766 | Код: 875422</small></td>
-        </tr>
-    </tbody>
-</table>
+                <!-- Четвер -->
+                <tr>
+                    <td rowspan="2">Четвер</td>
+                    <td>9:50 - 11:25</td>
+                    <td>Лекція: Методи та системи ШІ</td>
+                    <td>пр. Арсірій О.О.</td>
+                    <td>
+                        <a href="https://us02web.zoom.us/j/88573994331?pwd=S242c0FXVjRCYzRzS3FvU3dZbENtZz09" class="zoom-link" target="_blank">Приєднатися</a>
+                        <span class="details">ID: 885 7399 4331<br>Код: 779285</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:40 - 13:15</td>
+                    <td>Лаб: Методи та системи ШІ</td>
+                    <td>д. Смик С.Ю., д. Ніколенко А.О.</td>
+                    <td>
+                        <a href="https://us02web.zoom.us/j/75815387400?pwd=NmlqdGZmbW5yK1BuQmFiZXB1S2lKQT09" class="zoom-link" target="_blank">Приєднатися</a>
+                    </td>
+                </tr>
+
+                <!-- П'ятниця -->
+                <tr>
+                    <td rowspan="2">П'ятниця</td>
+                    <td>9:50 - 11:25</td>
+                    <td>Лекція: Цифрова обробка звуку та зображень</td>
+                    <td>д. Бабілунга О.Ю.</td>
+                    <td>
+                        <a href="https://us02web.zoom.us/j/87266012465?pwd=VmtrTC9kUFZTRXVhZXF1NEtod3h2dz09" class="zoom-link" target="_blank">Приєднатися</a>
+                        <span class="details">ID: 872 6601 2465<br>Код: 605676</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11:40 - 13:15</td>
+                    <td>Лаб: Системний аналіз</td>
+                    <td>ств. Гнатенко В.Ю., д. Куваєва В.І.</td>
+                    <td>
+                        <a href="https://us04web.zoom.us/j/2872972964?pwd=NVBhNmVVN2lNQlpqWmxHNWhOeXBFUT09" class="zoom-link" target="_blank">Приєднатися</a>
+                        <span class="details">ID: 420 970 6766<br>Код: 875422</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
